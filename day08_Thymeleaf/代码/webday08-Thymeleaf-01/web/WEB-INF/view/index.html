@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+</head>
+<body>
+    <!--
+        包含公共的头部内容
+            th:insert 就是将被包含的标签插入到本页面的标签里面
+            th:replace 就是用被包含的标签替换本页面的标签
+            th:include
+    -->
+    <div id="d1" th:include="segment :: header">
+        原本的头部内容
+    </div>
+
+    <!--
+        目的是访问WEb-INF/view/target.html
+    -->
+    <a th:href="@{/testThymeleaf(username='tom',team='中国男足',team='巴西男足')}">初步测试Thymeleaf</a>
+</body>
+</html>

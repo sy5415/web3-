@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>目标页面</title>
+</head>
+<body>
+    <!--包含公共的头部-->
+    <div th:insert="segment :: header">
+        原本的头部内容
+    </div>
+
+    <!--使用Thymeleaf修改标签体的文本内容-->
+    <h1 th:text="${username}">这里要显示一个动态的username</h1>
+    <!--
+        使用Thymeleaf修改标签的属性
+    -->
+    <input type="text" name="username" th:value="${username}" value="张三丰"/><br/>
+
+    <!--
+        使用Thymeleaf解析url地址
+
+        url地址后面可以附件请求参数
+    -->
+    <a th:href="@{/index(username=${username},password='123456')}">访问index.html</a><br/>
+
+    <!--
+        取出请求域中的值
+        ${请求域的name}
+    -->
+    <p th:text="${helloRequestAttr}">显示请求域中的值</p>
+    <!--
+        取出会话域中的值
+        ${session.会话域的name}
+    -->
+    <p th:text="${session.helloSessionAttr}">显示会话域中的值</p>
+
+    <!--
+        取出全局域中的值
+        ${application.全局域的name}
+    -->
+    <p th:text="${application.helloAppAttr}">显示全局域中的值</p>
+
+    <!--
+        在Thymeleaf中根据参数名获取一个请求参数
+        ${param.参数名}
+    -->
+    <p th:text="${param.username}">获取到的参数username的值</p>
+    <p th:text="${param.team[0]}">获取第一支球队</p>
+    <p th:text="${param.team[1]}">获取第二支球队</p>
+
+    <!--
+        使用Thymeleaf的基本内置对象: request
+    -->
+    <p th:text="${#request.getContextPath()}">获取项目部署名</p>
+    <p th:text="${#request.getAttribute('helloRequestAttr')}">获取请求域中的内容</p>
+
+    <!--
+        使用Thymeleaf中的公共内置对象: lists
+    -->
+    <p th:text="${#lists.isEmpty(aNotEmptyList)}">判断aNotEmptyList这个key对应的集合是否为空</p>
+    <p th:text="${#lists.isEmpty(anEmptyList)}">判断anEmptyList这个key对应的集合是否为空</p>
+
+
+    <!--
+        使用OGNL获取数据
+    -->
+    <p th:text="${student.studentName}">获取student的名字</p>
+    <p th:text="${student.subject.subjectName}">获取student的学科名字</p>
+    <p th:text="${student.schoolList[1].schoolName}">获取student的第二个学校的名字</p>
+    <p th:text="${student.teacherMap.tKey.teacherName}">获取student的老师的名字</p>
+
+    <!--
+        th:if如果它的值为true，那么就显示这个标签
+
+        th:unless 如果它的值为false则显示这个标签
+    -->
+    <p th:if="${#lists.isEmpty(teacherList)}">没有数据</p>
+    <p th:unless="${#lists.isEmpty(teacherList)}">有数据</p>
+
+    <!--
+        使用th:switch
+    -->
+    <div th:switch="${user.memberLevel}">
+        <p th:case="level-1">铁牌会员</p>
+        <p th:case="level-2">铜牌会员</p>
+        <p th:case="level-3">银牌会员</p>
+        <p th:case="level-4">金牌会员</p>
+    </div>
+
+    <!--遍历显示请求域中的teacherList-->
+    <table border="1" cellspacing="0" width="500">
+        <tr>
+            <th>编号</th>
+            <th>姓名</th>
+        </tr>
+        <tbody th:if="${#lists.isEmpty(teacherList)}">
+            <tr>
+                <td colspan="2">教师的集合是空的!!!</td>
+            </tr>
+        </tbody>
+
+        <!--
+            集合不为空，遍历展示数据
+        -->
+        <tbody th:unless="${#lists.isEmpty(teacherList)}">
+            <!--
+                使用th:each遍历
+                用法:
+                    1. th:each写在什么标签上？ 每次遍历出来一条数据就要添加一个什么标签，那么th:each就写在这个标签上
+                    2. th:each的语法    th:each="遍历出来的数据,数据的状态 : 要遍历的数据"
+                    3. status表示遍历的状态，它包含如下属性:
+                        3.1 index 遍历出来的每一个元素的下标
+                        3.2 count 遍历出来的每一个元素的计数
+                        3.3 size 遍历的集合的长度
+                        3.4 current 遍历出来的当前元素
+                        3.5 even/odd 表示遍历出来的元素是否是奇数或者是否是偶数
+                        3.6 first 表示遍历出来的元素是否是第一个
+                        3.7 last 表示遍历出来的元素是否是最后一个
+            -->
+            <tr th:each="teacher,status : ${teacherList}">
+                <td th:text="${status.count}">这里显示编号</td>
+                <td th:text="${teacher.teacherName}">这里显示老师的名字</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

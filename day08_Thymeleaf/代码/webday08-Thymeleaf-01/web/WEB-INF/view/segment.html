@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>被包含的页面</title>
+</head>
+<body>
+    <!--
+        抽取出来的公共的头部
+        使用th:fragment定义被包含的标签
+    -->
+    <div th:fragment="header">
+        <p>被抽取出来的头部内容</p>
+    </div>
+</body>
+</html>

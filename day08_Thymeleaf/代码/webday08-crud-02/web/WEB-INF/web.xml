@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+         version="4.0">
+
+    <!-- 在上下文参数中配置视图前缀和视图后缀 -->
+    <context-param>
+        <param-name>view-prefix</param-name>
+        <param-value>/WEB-INF/view/</param-value>
+    </context-param>
+    <context-param>
+        <param-name>view-suffix</param-name>
+        <param-value>.html</param-value>
+    </context-param>
+    <servlet>
+        <servlet-name>PortalServlet</servlet-name>
+        <servlet-class>com.atguigu.servlet.PortalServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ShowAllServlet</servlet-name>
+        <servlet-class>com.atguigu.servlet.ShowAllServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddSoldierServlet</servlet-name>
+        <servlet-class>com.atguigu.servlet.AddSoldierServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ToAddPageServlet</servlet-name>
+        <servlet-class>com.atguigu.servlet.ToAddPageServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteSoldierServlet</servlet-name>
+        <servlet-class>com.atguigu.servlet.DeleteSoldierServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ToUpdatePageServlet</servlet-name>
+        <servlet-class>com.atguigu.servlet.ToUpdatePageServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateSoldierServlet</servlet-name>
+        <servlet-class>com.atguigu.servlet.UpdateSoldierServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>UpdateSoldierServlet</servlet-name>
+        <url-pattern>/updateSoldier</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ToUpdatePageServlet</servlet-name>
+        <url-pattern>/toUpdatePage</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>DeleteSoldierServlet</servlet-name>
+        <url-pattern>/deleteSoldier</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>ToAddPageServlet</servlet-name>
+        <url-pattern>/toAddPage</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddSoldierServlet</servlet-name>
+        <url-pattern>/addSoldier</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ShowAllServlet</servlet-name>
+        <url-pattern>/showAll</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PortalServlet</servlet-name>
+        <url-pattern>/portal</url-pattern>
+    </servlet-mapping>
+</web-app>

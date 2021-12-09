@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>添加士兵的页面</title>
+</head>
+<body>
+    <form th:action="@{/addSoldier}" method="post">
+        士兵姓名<input name="soldierName"/><br/>
+        士兵武器<input name="soldierWeapon"/><br/>
+        <input type="submit" value="添加">
+    </form>
+</body>
+</html>
